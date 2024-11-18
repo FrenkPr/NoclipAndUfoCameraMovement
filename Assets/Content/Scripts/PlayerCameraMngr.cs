@@ -11,28 +11,40 @@ public class PlayerCameraMngr : MonoBehaviour
     private Vector3 moveVelocity;
     private Vector3 eulerAngles;
     private bool noclipMovement;
-    private bool showMouseCursor;
 
     // Start is called before the first frame update
     void Start()
     {
         noclipMovement = true;
-        showMouseCursor = true;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void MoveCamera()
+    public void QuitGame()
     {
-        if (noclipMovement)
+#if UNITY_EDITOR
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            NoclipMovement();
+            UnityEditor.EditorApplication.isPlaying = false;
         }
 
-        else
-        {
-            UFO_Movement();
-        }
+#else
 
-        transform.position += moveVelocity * Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Escape))
+	    {
+		    Application.Quit();
+	    }
+#endif
+    }
+
+    public void ToggleCameraMovement()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            noclipMovement = !noclipMovement;
+        }
     }
 
     private void NoclipMovement()
@@ -79,12 +91,19 @@ public class PlayerCameraMngr : MonoBehaviour
         //UI_Mngr.Instance.TextSprites["TextInfo"].text = ufoForward.ToString();
     }
 
-    public void ToggleCameraMovement()
+    public void MoveCamera()
     {
-        if (Input.GetKeyDown(KeyCode.N))
+        if (noclipMovement)
         {
-            noclipMovement = !noclipMovement;
+            NoclipMovement();
         }
+
+        else
+        {
+            UFO_Movement();
+        }
+
+        transform.position += moveVelocity * Time.deltaTime;
     }
 
     public void RotateCamera()
@@ -99,37 +118,13 @@ public class PlayerCameraMngr : MonoBehaviour
         eulerAngles += rotationSpeed * rotationDir * Time.deltaTime;
         eulerAngles.x = Mathf.Clamp(eulerAngles.x, minRotationX_Angle, maxRotationX_Angle);
 
-        transform.eulerAngles = eulerAngles;
-    }
-
-    public void ToggleMouseCursorVisibilityEvent()
-    {
-        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.F1))
-        {
-            ToggleMouseCursorVisibility();
-        }
-    }
-
-    void ToggleMouseCursorVisibility()
-    {
-        showMouseCursor = !showMouseCursor;
-
-        Cursor.visible = showMouseCursor;
-        Cursor.lockState = showMouseCursor ? CursorLockMode.None : CursorLockMode.Locked;
+        transform.rotation = Quaternion.Euler(eulerAngles);
     }
 
     // Update is called once per frame
     void Update()
     {
-#if UNITY_EDITOR
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
-#endif
-
-        ToggleMouseCursorVisibilityEvent();
+        QuitGame();
         ToggleCameraMovement();
 
         MoveCamera();

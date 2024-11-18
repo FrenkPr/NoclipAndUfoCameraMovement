@@ -143,6 +143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 100
-  rotationSpeed: 150
+  rotationSpeed: 200
   minRotationX_Angle: -90
   maxRotationX_Angle: 90

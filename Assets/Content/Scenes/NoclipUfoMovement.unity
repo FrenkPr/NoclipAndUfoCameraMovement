@@ -687,7 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2186bc66462cd0498edc6fcd6a44605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationVelocity: {x: 0, y: 0, z: 0}
+  rotationVelocity: {x: 50, y: 50, z: -50}
 --- !u!1 &1460722114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,6 +1020,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_MngrCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 232835584744295884, guid: 3463b427e543c4c4f9bd89c04ff190b7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 232835585675100902, guid: 3463b427e543c4c4f9bd89c04ff190b7, type: 3}
       propertyPath: m_text
       value: Text info
@@ -1085,10 +1089,6 @@ PrefabInstance:
     - target: {fileID: 4277777294456929413, guid: 256493383667e614599b8ccde84dbf6e, type: 3}
       propertyPath: m_Name
       value: PlayerCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 4811711212400788851, guid: 256493383667e614599b8ccde84dbf6e, type: 3}
-      propertyPath: moveSpeed
-      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

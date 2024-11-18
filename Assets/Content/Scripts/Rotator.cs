@@ -25,7 +25,8 @@ public class Rotator : MonoBehaviour
         currentEulerAngles += rotationVelocity * Time.deltaTime;
         //CheckAnglesOutOfBounds(ref currentEulerAngles);
 
-        transform.localEulerAngles = currentEulerAngles;
+        //transform.localEulerAngles = currentEulerAngles;
+        transform.localRotation = Quaternion.Euler(currentEulerAngles);
 
         //UI_Mngr.Instance.TextSprites["textInfo"].text = transform.eulerAngles.ToString();
         //UI_Mngr.Instance.TextSprites["textInfo"].text = currentEulerAngles.ToString();
